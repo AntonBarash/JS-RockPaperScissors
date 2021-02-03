@@ -1,0 +1,63 @@
+<script>
+    //0 is rock, 1 is paper, 2 is scissors
+    const options = ["rock", "paper", "scissors"];
+    function randomInteger(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function computerPlay() {
+        num = randomInteger(0,2)
+        return num
+    }
+    function userPlay() {
+        while(true) {
+            const userChoice = prompt("Please choose rock, paper, or scissors");
+            const lowerUserChoice = userChoice.toLowerCase();
+            switch(lowerUserChoice) {
+                case "rock":
+                    return 0
+                case "paper":
+                    return 1
+                case "scissors":
+                    return 2
+                default:
+                    console.log("You didn't pick rock, paper, or scissors! Please pick one of those.")
+            }
+        }
+    }
+    function playRound(playerSelection, compSelection) {
+        if (playerSelection == compSelection) {
+            console.log("Draw this round! " + options[playerSelection] + " draws " + options[compSelection] + ".") 
+            return 0
+        }
+        else if ((playerSelection == 0 && compSelection == 2) || (playerSelection == 1 && compSelection == 0) || (playerSelection == 2 && compSelection == 1)) {
+            console.log("You win this round! " + options[playerSelection] + " beats " + options[compSelection] + ".")
+            return 1
+        }
+        else {
+            console.log("You lose this round! " + options[playerSelection] + " loses to " + options[compSelection] + ".")
+            return 2
+        }
+    }
+    function game() {
+        let userWins = 0
+        let compWins = 0
+        while (userWins < 5 && compWins < 5) {
+            console.log("Score is " + userWins + "-" + compWins)
+            usernum = userPlay()
+            compnum = computerPlay()
+            switch(playRound(usernum,compnum)) {
+                case 1:
+                    userWins++
+                    break
+                case 2:
+                    compWins++
+            } 
+        }
+        switch(5) {
+            case userWins:
+                return "You won! Congratulations. The score was " + userWins + "-" + compWins + " in your favor."
+            case compWins:
+                return "You lost! Unfortunate. The score was " + compWins + "-" + userWins + " in the computer's favor."
+        }
+    }
+</script>
