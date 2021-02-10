@@ -1,0 +1,103 @@
+<div id="container">
+    <p>
+        To play pick one of the options.
+        <button id = "rock">
+            Rock
+        </button>
+        <button id = "paper">
+            Paper
+        </button>
+        <button id = "scissors">
+            Scissors
+        </button>
+        User chose:
+        <p id = "userchoice">
+
+        </p>
+        Computer chose:
+        <p id = "compchoice">
+
+        </p>
+        Winner: 
+        <p id = "winner">
+           
+        </p>
+        Score: 
+        <p id = "score">
+           
+        </p>
+    </p>   
+</div>
+
+<script>
+    let cont = document.querySelector('#container')
+    let userchoice = document.getElementById("userchoice");
+    let compchoice = document.getElementById("compchoice");
+    let winner = document.getElementById("winner");
+    let score = document.getElementById("score");
+    let rock = document.getElementById('rock');
+    let scissors = document.getElementById('scissors');
+    let paper = document.getElementById('paper');
+    rock.addEventListener('click', () => {
+        ret = 0;
+        game()
+    });
+    paper.addEventListener('click', () => {
+        ret = 1;
+        game()
+    });
+    scissors.addEventListener('click', () => {
+        ret = 2;
+        game()
+    });
+    let userWins = 0
+    let compWins = 0
+    const options = ["rock", "paper", "scissors"];
+    function randomInteger(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function computerPlay() {
+        num = randomInteger(0,2)
+        return num
+    }
+    function userPlay() {
+        return ret
+    }
+    function playRound(playerSelection, compSelection) {
+        if (playerSelection == compSelection) {
+            console.log("Draw this round! " + options[playerSelection] + " draws " + options[compSelection] + ".") 
+            userchoice.textContent = options[playerSelection]
+            compchoice.textContent = options[compSelection]
+            winner.textContent = "Neither, it's a draw"
+            return 0
+        }
+        else if ((playerSelection == 0 && compSelection == 2) || (playerSelection == 1 && compSelection == 0) || (playerSelection == 2 && compSelection == 1)) {
+            console.log("You win this round! " + options[playerSelection] + " beats " + options[compSelection] + ".")
+            userchoice.textContent = options[playerSelection]
+            compchoice.textContent = options[compSelection]
+            winner.textContent = "Person"
+            return 1
+        }
+        else {
+            console.log("You lose this round! " + options[playerSelection] + " loses to " + options[compSelection] + ".")
+            userchoice.textContent = options[playerSelection]
+            compchoice.textContent = options[compSelection]
+            winner.textContent = "Computer"
+            return 2
+        }
+    }
+
+    function game() {
+        usernum = ret
+        compnum = computerPlay()
+        switch(playRound(usernum,compnum)) {
+            case 1:
+                userWins++
+                break
+            case 2:
+                compWins++
+        }
+        score.textContent = userWins + "-" + compWins
+
+    }
+</script>
