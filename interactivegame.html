@@ -98,6 +98,15 @@
                 compWins++
         }
         score.textContent = userWins + "-" + compWins
-
+        if (userWins == 5) {
+            alert("You win! Congrats.")
+            userWins = 0
+            compWins = 0
+        }
+        if (compWins == 5) {
+            alert("Computer wins! Unfortunate.")
+            userWins = 0
+            compWins = 0
+        }
     }
 </script>
